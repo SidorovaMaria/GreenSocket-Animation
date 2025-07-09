@@ -1,10 +1,10 @@
 "use client";
-
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { navLinks } from "../constants";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 const NavBar = () => {
 	const navRef = useRef(null);
 
@@ -21,14 +21,12 @@ const NavBar = () => {
 			navRef.current,
 			{ backgroundColor: "transparent" },
 			{
-				immediateRender: false,
 				backgroundColor: "#00000050",
 				backdropFilter: "blur(10px)", // typo fixed: `backgroundFilter` ➜ `backdropFilter`
 				duration: 1,
 			}
 		);
 	}, []);
-
 	return (
 		<nav className="fixed z-50 w-full" ref={navRef}>
 			<div className="flex md:flex-row flex-col md:justify-between items-center  gap-5 py-5 lg:px-0 px-5 container mx-auto">
@@ -40,7 +38,7 @@ const NavBar = () => {
 					{navLinks.map((link) => (
 						<li key={link.id}>
 							<a
-								className="cursor-pointer text-nowrap font-semibold font-modern-negra md:text-xl tracking-widest text-2xl hover:text-purple-300 transition-all duration-300 ease-in-out"
+								className="cursor-pointer text-nowrapz md:text-base text-sm"
 								href={`#${link.id}`}
 							>
 								{link.title}
